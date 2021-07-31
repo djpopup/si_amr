@@ -1,0 +1,40 @@
+plugins:
+  - {name: static, type: "costmap_2d::StaticLayer"}
+  - {name: costmap_prohibition_layer, type: "costmap_prohibition_layer_namespace::CostmapProhibitionLayer"}
+  - {name: obstacle_layer, type: "costmap_2d::ObstacleLayer"}
+  - {name: inflation_layer, type: "costmap_2d::InflationLayer"}
+
+publish_frequency: 1.0
+
+costmap_prohibition_layer:
+  enabled: true
+  fill_polygons: true
+  prohibition_areas: 
+    # Point
+    - [1.0, 1.0]
+
+    # Line
+    - [ [1.5,1.5], [1.5,7.0] ]
+
+    # Polygon
+    - [ [1.89,14.0], [-12.5, 14], [-12.5,5.29], [1.89,5.29] ]
+
+  obstacle_layer:
+    # "obstacle range", it will put the obstacle in costmap
+    obstacle_range: 15.0
+
+    #  LIDAR spec range
+    raytrace_range: 20.0
+
+    # "Foot print" 1[-x,y],2[x,y],3[x,-y],4[-x,-y]
+    footprint: [ [0.56,0.36], [0.56,-0.36], [-0.56,-0.36], [-0.56,0.36] ]
+
+    # Set this factor to be bigger than robot radius
+    inflation_radius: 1.0
+
+    # Set this factor to be smaller in order to far from obstacles
+    cost_scaling_factor: 0.5
+
+    map_type: costmap
+
+    transform_tolerance: 0.2
